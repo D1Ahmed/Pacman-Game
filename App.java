@@ -11,11 +11,15 @@ public class App{
         int boardHieght = rowCount*tileSize;
 
         JFrame GameWindow= new JFrame("Pac Man");
-        GameWindow.setVisible(true);
         GameWindow.setLocationRelativeTo(null);
         GameWindow.setResizable(false);
         GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GameWindow.setSize(boardWidth,boardWidth);
+        GameWindow.setSize(boardWidth,boardHieght);
+
+        pacman pacmanGame=new pacman();
+        GameWindow.add(pacmanGame);
+       GameWindow.pack();
+       GameWindow.setVisible(true);
 
     }
 }
