@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
@@ -154,5 +155,15 @@ class Block{
 
             }
         }
+    }
+    public void paintComponent(Graphics g)
+    {
+        //calling the function from Jpannel extended class
+        super.paintComponent(g);
+        draw(g);
+    }
+    public void draw(Graphics g)
+    {
+        g.drawImage(pacman.image,pacman.x,pacman.y,pacman.width,pacman.hieght,null);
     }
 }
