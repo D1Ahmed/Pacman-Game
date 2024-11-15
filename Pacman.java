@@ -165,5 +165,17 @@ class Block{
     public void draw(Graphics g)
     {
         g.drawImage(pacman.image,pacman.x,pacman.y,pacman.width,pacman.hieght,null);
+
+        for(Block ghost: ghosts){
+            g.drawImage(ghost.image, ghost.x,ghost.y,ghost.width,ghost.hieght,null);
+        }
+        for(Block wall:walls)
+        {
+            g.drawImage(wall.image,wall.x,wall.y,wall.width,wall.hieght,null);
+        }
+        for(Block food : foods)
+        {
+            g.fillRect(food.x,food.y,food.width,food.hieght);
+        }
     }
 }
