@@ -19,7 +19,7 @@ public class App{
         pacman pacmanGame=new pacman();
         GameWindow.add(pacmanGame);
        GameWindow.pack();
-       GameWindow.setVisible(false);
+       GameWindow.setVisible(true);
 
     }
 }
