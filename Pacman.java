@@ -5,13 +5,17 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.net.Socket;
 import java.sql.Time;
 import java.util.HashSet;
+import javax.sound.sampled.SourceDataLine;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-class pacman extends JPanel implements ActionListener{
+class pacman extends JPanel implements ActionListener , KeyListener{
 
 class Block{
     int x;
@@ -88,6 +92,8 @@ class Block{
     {
         setPreferredSize(new Dimension(boardWidth,boardHieght));
         setBackground(Color.BLACK);
+        addKeyListener(this);
+        setFocusable(true);
 
         wallImage = new ImageIcon(getClass().getResource("./wall.png")).getImage();
         blueGhostImage = new ImageIcon(getClass().getResource("./blueGhost.png")).getImage();
@@ -189,5 +195,16 @@ class Block{
     @Override
     public void actionPerformed(ActionEvent e) {
       repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+            System.out.println("keyevent: "+ e.getKeyCode());
     }
 }

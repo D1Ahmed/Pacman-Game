@@ -19,6 +19,7 @@ public class App{
         pacman pacmanGame=new pacman();
         GameWindow.add(pacmanGame);
        GameWindow.pack();
+       pacmanGame.requestFocus();
        GameWindow.setVisible(true);
 
     }
