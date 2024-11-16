@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.Socket;
+import java.security.KeyException;
 import java.sql.Time;
 import java.util.HashSet;
 import javax.sound.sampled.SourceDataLine;
@@ -27,6 +28,10 @@ class Block{
     int startX;
     int startY;
 
+    char direction='U';
+    int velocityX=0;
+    int velocityY=0;
+
 
         public Block(Image image, int x, int y, int width,int hieght) {
            this.image=image;
@@ -36,6 +41,32 @@ class Block{
            this.hieght=hieght;
            this.startX=x;
            this.startY=y;
+        }
+
+        void updateDirection(char direction)
+        {
+                this.direction=direction;
+                updateVelocity();
+        }
+        void updateVelocity()
+        {
+            if(this.direction=='U'){
+                this.velocityX=0; // because if we go up, only Y speed changes, not X
+                this.velocityY=-tileSize/4;
+            }
+            else if(this.direction=='D'){
+                this.velocityX=0; 
+                this.velocityY=tileSize/4;
+            }
+            else if(this.direction=='L'){
+                this.velocityX=-tileSize/4; 
+                this.velocityY=0;
+            }
+            else if(this.direction=='R'){
+                this.velocityX=tileSize/4; 
+                this.velocityY=0;
+            }
+
         }
 
     
@@ -191,9 +222,16 @@ class Block{
             g.fillRect(food.x,food.y,food.width,food.hieght);
         }
     }
+  
+    public void move()
+    {
+        pacman.x+=pacman.velocityX;
+        pacman.y+=pacman.velocityY;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        move();
       repaint();
     }
 
@@ -205,6 +243,24 @@ class Block{
 
     @Override
     public void keyReleased(KeyEvent e) {
-            System.out.println("keyevent: "+ e.getKeyCode());
+           // System.out.println("keyevent: "+ e.getKeyCode());
+
+            if(e.getKeyCode()==KeyEvent.VK_UP)
+            {
+                pacman.updateDirection('U');
+            }
+            if(e.getKeyCode()==KeyEvent.VK_DOWN)
+            {
+                pacman.updateDirection('D');
+            }
+            if(e.getKeyCode()==KeyEvent.VK_LEFT)
+            {
+                pacman.updateDirection('L');
+            }
+            if(e.getKeyCode()==KeyEvent.VK_RIGHT)
+            {
+                pacman.updateDirection('R');
+            }
+
     }
 }
