@@ -3,11 +3,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-class pacman extends JPanel {
+class pacman extends JPanel implements ActionListener{
 
 class Block{
     int x;
@@ -79,7 +83,7 @@ class Block{
     HashSet<Block> foods;
     HashSet<Block> ghosts;
     Block pacman;
-    
+    Timer gameLoop;
     pacman()
     {
         setPreferredSize(new Dimension(boardWidth,boardHieght));
@@ -96,8 +100,11 @@ class Block{
         pacmanRight = new ImageIcon(getClass().getResource("./pacmanRight.png")).getImage();
         pacmanLeftImage = new ImageIcon(getClass().getResource("./pacmanLeft.png")).getImage();
 
+
         loadMap();
         
+        gameLoop = new Timer(50, this);
+        gameLoop.start();
     }
 
     public void loadMap()
@@ -177,5 +184,10 @@ class Block{
         {
             g.fillRect(food.x,food.y,food.width,food.hieght);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      repaint();
     }
 }
