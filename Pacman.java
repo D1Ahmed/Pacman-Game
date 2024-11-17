@@ -227,6 +227,25 @@ class Block{
     {
         pacman.x+=pacman.velocityX;
         pacman.y+=pacman.velocityY;
+
+        for (Block wall : walls)
+        {
+            if(collision(pacman, wall)){
+                pacman.x-=pacman.velocityX;
+                pacman.y-=pacman.velocityY;
+                break;
+                
+            }
+        }
+    }
+
+
+    public boolean  collision(Block a, Block b)
+    {
+        return a.x < b.x + b.width &&
+        a.x+ a.width> b.x&&
+        a.y<b.y +b.hieght &&
+        a.y +a.hieght>b.y;
     }
 
     @Override
