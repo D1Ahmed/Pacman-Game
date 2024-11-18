@@ -44,9 +44,25 @@ class Block{
         }
 
         void updateDirection(char direction)
-        {
+        {   
+                char PreviousDirection= this.direction;
                 this.direction=direction;
                 updateVelocity();
+
+                this.x = this.x+ this.velocityX;
+                this.y = this.y+ this.velocityY;
+
+                for(Block wall: walls)
+                {
+                    if(collision(this, wall))
+                    {
+                         this.x = this.x-this.velocityX;
+                         this.y = this.y- this.velocityY;
+                         this.direction=PreviousDirection;
+                         updateVelocity();
+                    }
+                }
+
         }
         void updateVelocity()
         {
